@@ -1,0 +1,3 @@
+Welcome on my site! This is my first blog post which is about nothing. It's just to test if this works. :) If you read this, it worked.
+
+Stay tuned...
