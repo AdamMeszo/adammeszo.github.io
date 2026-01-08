@@ -4,7 +4,7 @@ Hi, my name is Adam. I am a freelance software developer based in Slovakia. I de
 
 # Blog
 
-## [My first blog post](./my-first-blog-post)
+## [My first blog post](./first-blog-post)
 ### Author: AdamMeszo
 #### Date: Jan 8, 2026
 
