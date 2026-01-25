@@ -60,20 +60,14 @@
       "source": "\n// Commenting this causes and error\nimport java.util.Date;\n\nimport module java.base;\nimport module java.sql;\n\n// In JDK 21\n// import java.sql.*;\n// import javax.xml.parsers.*;\n\npublic class App {\n\n    public static void main(String[] args) throws SQLException, IOException, ParserConfigurationException, Exception {\n        try (Connection con = DriverManager.getConnection(\"no_url\"); Statement stmt = con.createStatement(\n                ResultSet.TYPE_SCROLL_INSENSITIVE,\n                ResultSet.CONCUR_UPDATABLE); ResultSet rs = stmt.executeQuery(\"SELECT a, b FROM TABLE2\")) {\n\n            if (rs.next()) {\n                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();\n                factory.setNamespaceAware(true);\n\n                SQLXML updatedXml = con.createSQLXML();\n                updatedXml.setString(\"\");\n\n                rs.updateSQLXML(\"b\", updatedXml);\n                rs.updateRow();\n            }\n        }\n\n        Date date = new Date();\n        List list = new ArrayList<>();\n    }\n}",
       "metadata": {
         "language": "java",
+        "id": "8cbc7071-28ab-4430-beee-7e611b866897",
         "executionSummary": {
           "executionOrder": 1,
           "success": true
         }
       },
       "execution_count": 1,
-      "outputs": [
-        {
-          "output_type": "execute_result",
-          "data": {},
-          "metadata": {},
-          "execution_count": 1
-        }
-      ]
+      "outputs": []
     },
     {
       "id": "0c89fb6a-01dc-4be6-a12e-00e43e85d076",

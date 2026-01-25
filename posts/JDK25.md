@@ -27,6 +27,7 @@ The main goal of this feature is to make it easier to students or beginners in J
     - no need to `import java.util.Date;` to use Date interface
 - `IO.println("Hello, World!");` instead of `System.out.println("Hello, World!");`
 	- implementation of the `IO` based upon `System.out` and `System.in` instead of `java.  io.Console`
+
 ```java
 // Compile using JDK 25
 // A sample Java JDK 25 application demonstrating new features from JEP 512.
@@ -58,7 +59,9 @@ void helperMethod() {
 List<String> listMethod() {
     return List.of("Item1", "Item2", "Item3");
 }
+```
 
+```java
 // Demonstrating that helper methods can't call each other if the called method was declared without static.
 // private static void unusedStaticMethod() {
 //     System.out.println("This is an unused static method.");
@@ -103,6 +106,7 @@ Using module imports provides more readable way to import different classes from
 - when importing java.sql.SQLXML using `import module java.sql.SQLXML;` no need to import both java.sql... and javax.xml... (works for other packages as well, SQLXML used just for illustration)
     - automatic on-demand import from transitive dependencies
 - when importing modules that export equally named classes (java.sql.Date and java.util.Data) and using this class (e.g.: Date class), one must specify the correct package using `import java.util.Date;`
+
 ```java
 // Commenting this causes and error
 import java.util.Date;
@@ -148,6 +152,7 @@ This feature makes constructors more flexible by removing the neccessity of `sup
 ### Key Features
 - write code before `super` or `this` calls in constructors
 - validate constructor parameters and fail fast
+
 ```java
 class User {
 
