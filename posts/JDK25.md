@@ -12,8 +12,6 @@ JDK 25 is LTS release of Java SE released in september 2025 with 5 years of prem
 
 All .java files with "before" prefix must be compiled using Java 21 JDK. All .java files with "JEP" prefix must be compiled using Java 25 JDK.
 
----
-
 ## [Compact Source Files and Instance Main Methods (JEP 512)](https://openjdk.org/jeps/512)
 
 The main goal of this feature is to make it easier to students or beginners in Java language to create simple application by omitting unnecessary keywords that are in fact not important in such use cases. Might be beneficial for quick "scripting" in Java.
@@ -95,8 +93,6 @@ public class beforeJEP512 {
 }
 ```
 
----
-
 ## [Module Import Declarations (JEP 511)](https://openjdk.org/jeps/511)
 
 Using module imports provides more readable way to import different classes from the same module but different package. Another advantage is that the developer does not need to know the exact package of the class.
@@ -143,8 +139,6 @@ public class App {
 }
 ```
 
----
-
 ## [Flexible Constructor Bodies (JEP 513)](https://openjdk.org/jeps/513)
 
 This feature makes constructors more flexible by removing the neccessity of `super` and `this` calls to be declared first and also promotes "fail fast" principle.
@@ -186,11 +180,7 @@ class StringUtils {
 }
 ```
 
----
-
-# TO BE CONTINUED...
-
----
+## TO BE CONTINUED...
 
 ## Resources
 
