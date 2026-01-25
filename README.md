@@ -4,7 +4,7 @@ Hi, my name is Adam. I am a freelance software developer based in Slovakia. I de
 
 # Blog
 
-* **Jan 25, 2026** - [Java 25 overview (WIP)](./posts/JDK25.ijnb)
+* **Jan 25, 2026** - [Java 25 overview (WIP)](./posts/JDK25.md)
 
 * **Jan 8, 2026** — [My first blog post](./posts/first-post.md)
 
