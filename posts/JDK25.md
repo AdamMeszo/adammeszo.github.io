@@ -180,6 +180,80 @@ class StringUtils {
 }
 ```
 
+## [Scoped Values (JEP 506)](https://openjdk.org/jeps/506)
+
+Provide immutable one-way (from top to bottom) option to pass data to methods called in a thread that are specific for the thread.
+
+Similiar to ThreadLocal but instead of being two-way highway with multiple exists and entries, Scoped Values represent one-way road with only one entry, without the ability to mutate its value.
+
+### Key Features
+- lightweight compared to ThreadLocal
+- immutable and one-way
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ScopedValueSample {
+    private static final ScopedValue<String> CONTEXT
+                        = ScopedValue.newInstance(); 
+
+    void main() throws Exception {
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        // for (int i = 0; i < 20; i++) {
+        //     executorService.execute(()->{
+        //         var threadName = Thread.currentThread().getName();
+        //         where(CONTEXT, threadName)
+        //             .run(() -> handleContext(threadName));
+        //     });
+        // }
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            for (int i = 0; i < 20; i++) {
+                int taskId = i;
+                executor.submit(() -> {
+                    var threadName = "Virtual-thread-" + String.valueOf(taskId);
+                    ScopedValue.where(CONTEXT, threadName)
+                        .run(() -> handleContext(threadName));
+                });
+            }
+        }
+        executorService.shutdown();
+    } 
+
+    void handleContext(String threadName) {
+        try {
+            Thread.sleep(1000);
+            String slept = pretendToDoSomething();
+            printContext(threadName, slept);
+        } catch (Exception e) {
+
+        }
+    }
+
+    void printContext(String threadName, String slept) {
+        IO.println(CONTEXT.get() + " is " + threadName + "? Answer: " + threadName.equals(CONTEXT.get()) + ". And slept for: " + slept);
+    }
+
+    private String pretendToDoSomething() throws Exception {
+        String name = CONTEXT.get();
+
+        if (name.contains("1") || name.contains("16")) {
+            Thread.sleep(500);
+            return "500";
+        } else if (name.contains("5") || name.contains("17") || name.contains("20")) {
+            Thread.sleep(800);
+            return "800";
+        } else if (name.contains("7") || name.contains("8") || name.contains("9")) {
+            Thread.sleep(1000);
+            return "1000";
+        } else {
+            Thread.sleep(100);
+            return "100";
+        }
+    }
+}
+```
+
 ## TO BE CONTINUED...
 
 ## Resources

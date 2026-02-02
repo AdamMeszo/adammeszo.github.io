@@ -28,21 +28,31 @@
     {
       "id": "553e2ac7-ec64-46be-9dd8-9b63bdb104d8",
       "cell_type": "code",
-      "source": "// Compile using JDK 25\n// A sample Java JDK 25 application demonstrating new features from JEP 512.\n// No need to import java.util.Date and java.util.List explicitly.\nimport java.math.BigDecimal;\n\n// No need to declare the class.\n\n// No need to declare the main method as static.\nvoid main() {\n    // No need to use System.out.println; use IO.println instead.\n    IO.println(\"Hello, World!\");\n    IO.println(\"This is a sample Java JDK 25 application.\");\n    BigDecimal bigDecimal = new BigDecimal(\"123.45\");\n    IO.println(bigDecimal);\n    helperMethod();\n    for (String item : listMethod()) {\n        IO.println(item);\n    }\n    Date date = new Date();\n    IO.println(date);\n}\n\n// No problem declaring methods without static keyword.\nvoid helperMethod() {\n    IO.println(\"This is a helper method.\");\n}\n\nList<String> listMethod() {\n    return List.of(\"Item1\", \"Item2\", \"Item3\");\n}\n\n// Demonstrating that helper methods can't call each other if the called method was declared without static.\n// private static void unusedStaticMethod() {\n//     System.out.println(\"This is an unused static method.\");\n//     helperMethod();\n// }",
+      "source": "// Compile using JDK 25\n// A sample Java JDK 25 application demonstrating new features from JEP 512.\n// No need to import java.util.Date and java.util.List explicitly.\nimport java.math.BigDecimal;\n\n// No need to declare the class.\n\n// No problem declaring methods without static keyword.\nvoid helperMethod() {\n    IO.println(\"This is a helper method.\");\n}\n\nList<String> listMethod() {\n    return List.of(\"Item1\", \"Item2\", \"Item3\");\n}\n\n// No need to declare the main method as static.\nvoid main() {\n    // No need to use System.out.println; use IO.println instead.\n    IO.println(\"Hello, World!\");\n    IO.println(\"This is a sample Java JDK 25 application.\");\n    BigDecimal bigDecimal = new BigDecimal(\"123.45\");\n    IO.println(bigDecimal);\n    helperMethod();\n    for (String item : listMethod()) {\n        IO.println(item);\n    }\n    Date date = new Date();\n    IO.println(date);\n}\n\n// Demonstrating that helper methods can't call each other if the called method was declared without static.\n// private static void unusedStaticMethod() {\n//     System.out.println(\"This is an unused static method.\");\n//     helperMethod();\n// }",
       "metadata": {
-        "language": "java"
+        "language": "java",
+        "id": "553e2ac7-ec64-46be-9dd8-9b63bdb104d8",
+        "executionSummary": {
+          "executionOrder": 7,
+          "success": true
+        }
       },
-      "execution_count": null,
+      "execution_count": 7,
       "outputs": []
     },
     {
       "id": "e5a3d51f-f071-45a0-a32f-2b378ef0288a",
       "cell_type": "code",
-      "source": "// Compile using JDK 21\n// Old way of writing the same code\nimport java.math.BigDecimal;\nimport java.util.List;\n\npublic class beforeJEP512 {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n        System.out.println(\"This is a sample Java JDK 25 application.\");\n        BigDecimal bigDecimal = new BigDecimal(\"123.45\");\n        System.out.println(bigDecimal);\n        helperMethod();\n        for (String item : listMethod()) {\n            System.out.println(item);\n        }\n    }\n\n    private static List<String> listMethod() {\n        // TODO Auto-generated method stub\n        return List.of(\"Item1\", \"Item2\", \"Item3\");    \n    }\n\n    private static void helperMethod() {\n        System.out.println(\"This is a helper method.\");\n    }\n}\n",
+      "source": "// Compile using JDK 21\n// Old way of writing the same code\nimport java.math.BigDecimal;\nimport java.util.List;\n\npublic class beforeJEP512 {\n    private static List<String> listMethod() {\n        // TODO Auto-generated method stub\n        return List.of(\"Item1\", \"Item2\", \"Item3\");    \n    }\n\n    private static void helperMethod() {\n        System.out.println(\"This is a helper method.\");\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n        System.out.println(\"This is a sample Java JDK 25 application.\");\n        BigDecimal bigDecimal = new BigDecimal(\"123.45\");\n        System.out.println(bigDecimal);\n        helperMethod();\n        for (String item : listMethod()) {\n            System.out.println(item);\n        }\n    }\n}\n",
       "metadata": {
-        "language": "java"
+        "language": "java",
+        "id": "e5a3d51f-f071-45a0-a32f-2b378ef0288a",
+        "executionSummary": {
+          "executionOrder": 6,
+          "success": true
+        }
       },
-      "execution_count": null,
+      "execution_count": 6,
       "outputs": []
     },
     {
@@ -62,11 +72,11 @@
         "language": "java",
         "id": "8cbc7071-28ab-4430-beee-7e611b866897",
         "executionSummary": {
-          "executionOrder": 1,
+          "executionOrder": 9,
           "success": true
         }
       },
-      "execution_count": 1,
+      "execution_count": 9,
       "outputs": []
     },
     {
@@ -81,7 +91,26 @@
     {
       "id": "73474a9e-120c-4991-9092-3ceec3d209f5",
       "cell_type": "code",
-      "source": "\nclass User {\n\n    final String name;\n    final String email;\n\n    User(String name, String email) {\n        this.name = name;\n        this.email = email;\n    }\n}\n\nclass Broker extends User {\n\n    final String workplace;\n\n    public Broker(String workplace, String name, String email) {\n        if (StringUtils.isEmpty(name) || StringUtils.isEmpty(email)) {\n            throw new IllegalArgumentException();\n        }\n        super(name, email);\n        this.workplace = workplace;\n    }\n}\n\nclass StringUtils {\n\n    public static boolean isEmpty(String str) {\n        return str == null || str.isEmpty();\n    }\n}\n",
+      "source": "\nclass User {\n\n    final String name;\n    final String email;\n\n    User(String phone, String name, String email) {\n        // validatePhone\n        this(name, email);\n    }\n\n    User(String name, String email) {\n        this.name = name;\n        this.email = email;\n    }\n}\n\nclass Broker extends User {\n\n    final String workplace;\n\n    public Broker(String workplace, String name, String email) {\n        if (StringUtils.isEmpty(name) || StringUtils.isEmpty(email)) {\n            throw new IllegalArgumentException();\n        }\n        super(name, email);\n        this.workplace = workplace;\n    }\n}\n\nclass StringUtils {\n\n    public static boolean isEmpty(String str) {\n        return str == null || str.isEmpty();\n    }\n}\n",
+      "metadata": {
+        "language": "java"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "id": "3d7271b8-1d10-4a36-9dfe-d14b07b81b90",
+      "cell_type": "markdown",
+      "source": "## [Scoped Values (JEP 506)](https://openjdk.org/jeps/506)\r\n\r\nProvide immutable one-way (from top to bottom) option to pass data to methods called in a thread that are specific for the thread.\r\n\r\nSimiliar to ThreadLocal but instead of being two-way highway with multiple exists and entries, Scoped Values represent one-way road with only one entry, without the ability to mutate its value.\r\n\r\n### Key Features\r\n- lightweight compared to ThreadLocal\r\n- immutable and one-way",
+      "metadata": {
+        "language": "markdown",
+        "id": "3d7271b8-1d10-4a36-9dfe-d14b07b81b90"
+      }
+    },
+    {
+      "id": "8feb419c-1f03-4129-8bd1-fc303fc7dc17",
+      "cell_type": "code",
+      "source": "import java.util.concurrent.ExecutorService;\r\nimport java.util.concurrent.Executors;\r\n\r\npublic class ScopedValueSample {\r\n    private static final ScopedValue<String> CONTEXT\r\n                        = ScopedValue.newInstance(); \r\n\r\n    void main() throws Exception {\r\n        ExecutorService executorService = Executors.newFixedThreadPool(5);\r\n        // for (int i = 0; i < 20; i++) {\r\n        //     executorService.execute(()->{\r\n        //         var threadName = Thread.currentThread().getName();\r\n        //         where(CONTEXT, threadName)\r\n        //             .run(() -> handleContext(threadName));\r\n        //     });\r\n        // }\r\n        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {\r\n            for (int i = 0; i < 20; i++) {\r\n                int taskId = i;\r\n                executor.submit(() -> {\r\n                    var threadName = \"Virtual-thread-\" + String.valueOf(taskId);\r\n                    ScopedValue.where(CONTEXT, threadName)\r\n                        .run(() -> handleContext(threadName));\r\n                });\r\n            }\r\n        }\r\n        executorService.shutdown();\r\n    } \r\n\r\n    void handleContext(String threadName) {\r\n        try {\r\n            Thread.sleep(1000);\r\n            String slept = pretendToDoSomething();\r\n            printContext(threadName, slept);\r\n        } catch (Exception e) {\r\n\r\n        }\r\n    }\r\n\r\n    void printContext(String threadName, String slept) {\r\n        IO.println(CONTEXT.get() + \" is \" + threadName + \"? Answer: \" + threadName.equals(CONTEXT.get()) + \". And slept for: \" + slept);\r\n    }\r\n\r\n    private String pretendToDoSomething() throws Exception {\r\n        String name = CONTEXT.get();\r\n\r\n        if (name.contains(\"1\") || name.contains(\"16\")) {\r\n            Thread.sleep(500);\r\n            return \"500\";\r\n        } else if (name.contains(\"5\") || name.contains(\"17\") || name.contains(\"20\")) {\r\n            Thread.sleep(800);\r\n            return \"800\";\r\n        } else if (name.contains(\"7\") || name.contains(\"8\") || name.contains(\"9\")) {\r\n            Thread.sleep(1000);\r\n            return \"1000\";\r\n        } else {\r\n            Thread.sleep(100);\r\n            return \"100\";\r\n        }\r\n    }\r\n}",
       "metadata": {
         "language": "java"
       },
